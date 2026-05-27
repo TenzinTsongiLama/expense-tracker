@@ -6,18 +6,21 @@ const API = import.meta.env.VITE_API_URL;
 export function useExpenses(filters = {}) {
   const [expenses, setExpenses] = useState([]);
   const [summary, setSummary] = useState({ byCategory: [], totalAmount: 0 });
+  const [monthlyTrend, setMonthlyTrend] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchAll = async () => {
     try {
       setLoading(true);
-      const [expRes, sumRes] = await Promise.all([
+      const [expRes, sumRes, trendRes] = await Promise.all([
         axios.get(`${API}/expenses`, { params: filters }),
-        axios.get(`${API}/expenses/summary`)
+        axios.get(`${API}/expenses/summary`),
+        axios.get(`${API}/expenses/monthly-trend`)
       ]);
       setExpenses(expRes.data);
       setSummary(sumRes.data);
+      setMonthlyTrend(trendRes.data);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -42,5 +45,5 @@ export function useExpenses(filters = {}) {
     fetchAll();
   };
 
-  return { expenses, summary, loading, error, addExpense, updateExpense, deleteExpense };
+  return { expenses, summary, monthlyTrend, loading, error, addExpense, updateExpense, deleteExpense };
 }
