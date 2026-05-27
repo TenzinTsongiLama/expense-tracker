@@ -27,7 +27,7 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <p className="text-sm text-gray-500">Total Expenses</p>
           <p className="text-3xl font-bold text-indigo-600">
-            ${summary.totalAmount.toFixed(2)}
+            £{summary.totalAmount.toFixed(2)}
           </p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
@@ -52,7 +52,7 @@ export default function Dashboard() {
                     <Cell key={index} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => `$${value.toFixed(2)}`} />
+                <Tooltip formatter={(value) => `£${value.toFixed(2)}`} />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -64,7 +64,7 @@ export default function Dashboard() {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
-                <Tooltip formatter={(value) => `$${value.toFixed(2)}`} />
+                <Tooltip formatter={(value) => `£${value.toFixed(2)}`} />
                 <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -89,7 +89,7 @@ export default function Dashboard() {
                   <p className="font-medium text-gray-800">{exp.title}</p>
                   <p className="text-sm text-gray-500">{exp.category} • {new Date(exp.date).toLocaleDateString()}</p>
                 </div>
-                <p className="font-bold text-indigo-600">${exp.amount.toFixed(2)}</p>
+                <p className="font-bold text-indigo-600">£{exp.amount.toFixed(2)}</p>
               </div>
             ))}
           </div>
